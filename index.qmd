@@ -51,8 +51,12 @@ editor: visual
 ```
 
 ```{r, echo=FALSE}
-# Load required libraries if needed
+#| label: load-packages
+#| echo: false
+#| output: false
 
+# Load required libraries if needed
+source('load_packages.R')
 ```
 
 ```{r, echo=FALSE, results='asis'}
@@ -126,40 +130,274 @@ The EIA will employ a mixed-methods approach, combining quantitative and qualita
 A total of **237** were surveyed over the period December to January 2025. This period allowed us to capture persons towards the end of their stay to be able to assess the true extent of their expenditure whilst in the Federation.
 
 ```{r}
-#| label: gg-oz-gapminder
-#| fig-cap: "Life expectancy from 1952 - 2007 for Australia. Life expentancy increases steadily except from 1962 to 1969. We can safely say that our life expectancy is higher than it has ever been!"
-library(ggplot2)
-library(dplyr)
-library(gapminder)
+#| echo: false
+#| output: false
+source(here("load_survey_data.R"))
 
-gapminder |>
-  filter(country == "Australia") |>
-  ggplot(aes(x = lifeExp,
-             y = year)) + 
-  geom_point()
+# load font for plots
+# .font <- "Noto Sans"
+# if (!(.font %in% sysfonts::font_families()))
+#   sysfonts::font_add_google(.font, .font)
+# showtext::showtext_auto()
+
+# theme_set(theme_minimal(base_family = 'Noto Sans',
+#                         base_size = 20))
 ```
 
-**Total Number of respondents**:
+**Total Number of respondents** was 237.
 
 **Respondents by Gender**
 
-![Figure 1:](graphs/gender.png){fig-align="left"}
+The majority of respondents to the survey were females, females accounted for two thirds (68.2%) of the respondents. See @fig-gender for an illustration.
+
+```{r}
+#| label: fig-gender
+#| fig-cap: "Responses by Gender"
+#| fig-dpi: 300
+#| fig-cap-location: top
+#| echo: false
+
+p_gender <- df2 %>% group_by(gender) %>% tally() |> 
+  ggpubr::ggpie('n', label = 'gender', 
+                fill = 'gender',
+                color = "white",
+                palette = c('#04943b', "#E7B800",      '#cb152b',
+                            '#7c7c7c', '#665d38',
+                            "#00AFBB") )
+
+
+plot(p_gender)
+```
 
 **Distribution of Responses:**
 
-![](graphs/age.png)
+Persons between the ages of 25 to 44 accounted for 66.4 percent of the responses see @fig-age.
 
-**Almost two-thirds of of respondents less than \$2,000 on carnival celebrations**.
+```{r}
+#| label: fig-age
+#| fig-cap: "Responses by Gender"
+#| fig-dpi: 300
+#| fig-cap-location: top
+#| echo: false
 
-![](graphs/spend.png)
+p_age <- df3 %>% group_by(Q4) %>% tally() |> 
+  ggpubr::ggpie('n', label = 'Q4', 
+                fill = 'Q4',
+                color = "white",
+                palette = c('#04943b', "#E7B800",      '#cb152b',
+                            '#7c7c7c', '#665d38',
+                            "#00AFBB") )
 
-![](graphs/frequency.png)
+
+plot(p_age)
+```
+
+**Almost two-thirds of of respondents less than** \$2,000 on carnival celebrations. If we generalize this amount to the total population attending carnival, we can assume that on average expenditure during carnival is \$12.0m. The economic multiplier across various studies suggest that economic multiplier. See @fig-spend below.
+
+```{r}
+#| label: fig-spend
+#| fig-cap: "Responses by Spend"
+#| fig-dpi: 300
+#| fig-cap-location: top
+#| echo: false
+
+p_spend <- df3 %>% group_by(Q13) %>% tally() |> 
+  # mutate(n = fct_reorder(Q13, Q13, .desc = TRUE))
+  ggplot(aes(x= reorder(Q13,-n), y = n, fill = Q13))+
+  geom_col()+
+  labs(x= "Expenditure Category", y = 'Number of reponses')+
+  scale_y_continuous(breaks = scales::breaks_width(10),
+                     expand = c(0,0))+
+  # scale_fill_manual(values =c('#04943b', "#E7B800",      '#cb152b',
+  #                             '#7c7c7c', '#665d38',
+  #                             "#00AFBB") )
+  scale_fill_brewer(palette = "Set1", name = 'Expenditure') +
+  theme_minimal() +
+  theme(legend.position = 'top')
+
+
+plot(p_spend)
+```
+
+```{r}
+#| label: fig-events
+#| fig-cap: "Responses by Number of Events attended"
+#| fig-dpi: 300
+#| fig-cap-location: top
+#| fig-width: 4
+#| echo: false
+
+p_events <- df3 %>% group_by(Q12) %>% tally() |> 
+  # mutate(n = fct_reorder(Q13, Q13, .desc = TRUE))
+  ggplot(aes(x= reorder(Q12,-n), y = n, fill = Q12))+
+  geom_col()+
+  labs(x= "Expenditure Category", y = 'Number of reponses')+
+  scale_y_continuous(breaks = scales::breaks_width(10),
+                     expand = c(0,0))+
+  # scale_fill_manual(values =c('#04943b', "#E7B800",      '#cb152b',
+  #                             '#7c7c7c', '#665d38',
+  #                             "#00AFBB") )
+  scale_fill_brewer(palette = "Set1", name = 'Expenditure') +
+  theme_minimal() +
+  theme(legend.position = 'top')
+
+
+plot(p_events)
+```
+
+```{r}
+#| label: fig-transport
+#| fig-cap: "Amount spent on Transportation"
+#| fig-dpi: 300
+#| fig-cap-location: top
+#| echo: false
+
+p_transport <- df3 %>% group_by(Q18) %>% tally() |> 
+  # mutate(n = fct_reorder(Q13, Q13, .desc = TRUE))
+  ggplot(aes(x= reorder(Q18,-n), y = n, fill = Q18))+
+  geom_col()+
+  labs(x= "Expenditure Category", y = 'Number of reponses')+
+  scale_y_continuous(breaks = scales::breaks_width(10),
+                     expand = c(0,0))+
+  # scale_fill_manual(values =c('#04943b', "#E7B800",      '#cb152b',
+  #                             '#7c7c7c', '#665d38',
+  #                             "#00AFBB") )
+  scale_fill_brewer(palette = "Set1", name = 'Expenditure') +
+  theme_minimal() +
+  theme(legend.position = 'top')
+
+
+plot(p_transport)
+
+```
+
+```{r}
+#| label: fig-prep
+#| fig-cap: "Amount spent on Transportation"
+#| fig-dpi: 300
+#| fig-cap-location: top
+#| echo: false
+
+p_prep <- df3 %>% group_by(Q17) %>% 
+  tally() |> 
+  # mutate(n = fct_reorder(Q13, Q13, .desc = TRUE))
+  ggplot(aes(x= reorder(Q17,-n), y = n, fill = Q17))+
+  geom_col()+
+  labs(x= "Expenditure Category", y = 'Number of reponses')+
+  scale_y_continuous(breaks = scales::breaks_width(10),
+                     expand = c(0,0))+
+  # scale_fill_manual(values =c('#04943b', "#E7B800",      '#cb152b',
+  #                             '#7c7c7c', '#665d38',
+  #                             "#00AFBB") )
+  scale_fill_brewer(palette = "Set1", name = 'Expenditure') +
+  theme_minimal() +
+  theme(legend.position = 'top')
+
+
+plot(p_prep)
+```
+
+```{r}
+#| label: fig-spend2
+#| fig-cap: "Amount spent tickets"
+#| fig-dpi: 300
+#| fig-cap-location: top
+#| echo: false
+
+p_events2 <- df3 %>% group_by(Q16) %>% 
+  tally() |> 
+  # mutate(n = fct_reorder(Q13, Q13, .desc = TRUE))
+  ggplot(aes(x= reorder(Q16,-n), y = n, fill = Q16))+
+  geom_col()+
+  labs(x= "Expenditure Category", y = 'Number of reponses')+
+  scale_y_continuous(breaks = scales::breaks_width(10),
+                     expand = c(0,0))+
+  # scale_fill_manual(values =c('#04943b', "#E7B800",      '#cb152b',
+  #                             '#7c7c7c', '#665d38',
+  #                             "#00AFBB") )
+  scale_fill_brewer(palette = "Set1", name = 'Expenditure') +
+  theme_minimal() +
+  theme(legend.position = 'top')
+
+
+plot(p_events2)
+```
+
+```{r}
+#| label: fig-food
+#| fig-cap: "Amount spent food and beverage"
+#| fig-dpi: 300
+#| fig-cap-location: top
+#| echo: false
+
+p_food <- df3 %>% group_by(Q15) %>% 
+  tally() |> 
+  # mutate(n = fct_reorder(Q13, Q13, .desc = TRUE))
+  ggplot(aes(x= reorder(Q15,-n), y = n, fill = Q15))+
+  geom_col()+
+  labs(x= "Expenditure Category", y = 'Number of reponses')+
+  scale_y_continuous(breaks = scales::breaks_width(10),
+                     expand = c(0,0))+
+  # scale_fill_manual(values =c('#04943b', "#E7B800",      '#cb152b',
+  #                             '#7c7c7c', '#665d38',
+  #                             "#00AFBB") )
+  scale_fill_brewer(palette = "Set1", name = 'Expenditure') +
+  theme_minimal() +
+  theme(legend.position = 'top')
+
+
+plot(p_food)
+
+```
+
+**On average females had a stronger propensity to spend than men**. Although the survey was dominated by responses from females, women on average had a stringer spend factor than men. For example, of the 32 persons that indicated that they spent more than \$1,200 for the carnival season, women accounted for 23 of these responses, see @tab-table1.
+
+```{r}
+#| label: tab-table1
+#| tab-cap: "Amount spent food and beverage"
+#| tab-cap-location: top
+#| echo: false
+
+sjPlot::sjt.xtab(var.row = df3$Q3, 
+                 var.col = df3$Q17, 
+                 title = "Relationship between Gender and Expenditure", 
+                 show.row.prc = TRUE)
+
+```
+
+**The lower the number of events attended the greater the spend.** A secondary aspect investigated was the relationship between the number of events attended and the avereage spend on carnival, see @tab-table2. This may seem counter-intutitive but we suspect that this has to do with budgetary constraints faced during the holiday season, whereby persons have to make a decision between attending a large number of events and have lower spending versus a smaller number of events and higher spend factor.
+
+```{r}
+#| label: tab-table2
+#| tab-cap: "Relationship between number events attended and spending"
+#| tab-cap-location: top
+#| echo: false
+
+sjPlot::sjt.xtab(var.row = df3$Q12, 
+                 var.col = df3$Q13, 
+                 title = "", 
+                 show.row.prc = TRUE)
+
+
+```
+
+**The three multipliers used are:**
+
+1.  Direct Expenditure by festival organizers.
+
+2.  Ancillary Expenditure by festival attendees.
+
+3.  Capital Expenditure in respect of the project or event.
+
+**More generally multipliers are quoted as being of three types:**
+
+1.  Type I – Include direct or initial spending on a project as well as indirect spending (i.e. business to business). These may also be known as first order multipliers;
+
+2.  Type II – As in type I plus “induced” effects (from i.e. increased household spending from wages earned). These higher order effects are calculated using Input-Output analysis;
+
+3.  Type III – include the direct, indirect and induced spending but are modified according to spending patterns and demographics.
 
 A total of 92 persons responded to the accommodation question. 55.4% of the respondents spent over 2,000 on accommodation. Roughly, XCD 1.1m was spent over the few weeks in St Kitts
-
-![](graphs/accomodation.png)
-
-![](graphs/food_beverage.png)
 
 ## Discussion
 
