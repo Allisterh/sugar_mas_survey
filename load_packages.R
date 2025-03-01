@@ -20,10 +20,17 @@ memory.limit(30000000)     # this is needed on some PCs to increase memory allow
 
 
 if(!require('renv')) install.packages('renv')
+# renv::init()
 if (!require("pacman")) install.packages("pacman")
+if (!require("janitor")) install.packages("janitor")
 library(pacman)
-suppressPackageStartupMessages(pacman::p_load(tidyverse, vcd, vcdExtra, questionr, pollster, 
-                                              janitor, sjPlot, memisc))
+suppressPackageStartupMessages(
+  pacman::p_load(tidyverse, scales,
+                 knitr, sjPlot,
+                 vcd, vcdExtra, 
+                 questionr, pollster, 
+                janitor, sjPlot, memisc, 
+                ggpubr))
 ## set working directory for Mac and PC
 
 
@@ -47,165 +54,3 @@ gs4_user()
 "#562457"
 "#552D62"
 
-library(readr)
-df <- readr::read_tsv('data_input/KNA_carnival_data.tsv')
-
-
-if (!require("janitor")) install.packages("janitor")
-
-
-df2 <- df |>  
-  janitor::clean_names()
-
-
-df2 |> 
-  dplyr::mutate(across(c(gender, age, nationality), 
-                ~as.factor(.)))
-
-
-df_l5 %>% map(~tabyl(., q7 , q8))
-
-
-library(tidyverse)
-df2 %>% group_by(nationality) %>% tally() 
-library(ggpubr)
-
-
-
-df2 %>% group_by(nationality) %>% tally() |> 
-  ggpubr::ggpie('n', label = 'nationality', 
-                fill = 'nationality',
-                color = "white",
-                palette = c('#04943b', "#E7B800", '#cb152b',
-                            '#7c7c7c', '#665d38',
-                            "#00AFBB") )
-
-
-
---salem: '#04943b';
-  --crimson: '#cb152b';
-  --ripe-lemon: '#f7cb0b';
-  --black: '#040404';
-  --verdigris: '#665d38';
-  --gray: '#848484';
-  --boulder: '#7c7c7c';
-  --mine-shaft: '#3c3c3c';
-  --cannon-black: '#2d2407';
-  --mine-shaft: '#2c2c2c';
-
-
-df2 |>  
-  select(20) |> 
-  setNames('Q20') |> 
-  mutate(Q20 = as.factor(Q20)) |> 
-  group_by(Q20) %>% tally() |> 
-  drop_na() |> 
-  mutate(all = sum(n)) |> 
-  mutate(percentage = (n/all)*100) 
-  
-
-library(scales)
-df2 |>  
-  select(12) |> 
-  setNames('Q12') |> 
-  mutate(Q12 = as.factor(Q12)) |> 
-  group_by(Q12) %>% tally() |> 
-  drop_na() |> 
-  mutate(all = sum(n)) |> 
-  mutate(percentage = n/all) |> 
-  mutate(percentage1= paste(Q12, scales::percent(percentage))) |> 
-  ggpubr::ggpie('percentage', 
-                label = 'percentage1', 
-                fill = 'Q12',
-                color = "white",
-                palette = c('#04943b', "#E7B800", '#cb152b',
-                            '#7c7c7c', '#665d38',
-                            "#00AFBB") ,
-                lab.pos = "in", lab.font = "white")
-
-
-# compute frequency of sectors
-df2 |>  
-  select(12) |> 
-  setNames('Q12') |> 
-  mutate(Q12 = as.factor(Q12)) |> 
-  group_by(Q12) |> 
-           
-  summarise(n = n()) %>%
-  mutate(freq = n / sum(n))
-
-
-with(df2, frequency(age, ord = 'desc'))
-table(df2$gender, df2$age)
-
-mytable <- xtabs(~age+gender, data=df2)
-ftable(mytable) # print table
-summary(mytable) # chi-square test of independence
-
-df2 %>%
-  tabyl(gender, age) %>% 
-  adorn_totals(where = c("row","col"))
-  adorn_totals(where = "row")
-
-
-library(knitr)
-kable(df2 %>%
-  tabyl(gender, age) %>% 
-  adorn_totals("col") %>%
-  adorn_percentages("row") %>%
-  adorn_pct_formatting(digits = 2) %>%
-  adorn_ns() %>%
-  adorn_title())
-df2 |> ncol()
-df2 |> dim()
-
-
-
-V0:V22
-df3 <- df2 |> 
-  setNames(paste0("Q",seq(1:ncol(df2)))) |> 
-  print(n=10) |> 
-  mutate(across(Q3:Q23, ~as.factor(.)))
-
-length(df2)
-ncol(df2)
-
-df3 |>  
-  select(Q17) |> 
-  group_by(Q17) |> 
-  
-  summarise(n = n()) %>%
-  mutate(freq = n / sum(n))
-
-
-library(pollster)
-
-df1 <- pollster::illinois
-crosstab(df = df3, x = Q3, y = Q17) %>%
-  kable()       
-
-
-library(sjPlot)
-sjPlot::sjt.xtab(var.row = df3$Q3, 
-                 var.col = df3$Q17, 
-                 title = "Table Title", 
-                 show.row.prc = TRUE)
-
-
-sjPlot::plot_xtab(df3$Q3,df3$Q17,
-                  margin = 'row',
-  bar.pos = "stack", 
-  coord.flip = TRUE) +
-  theme_minimal()
-
-sjPlot::plot_xtab(df3$Q3,df3$Q12,
-                  margin = 'row',
-                  bar.pos = "stack", 
-                  coord.flip = TRUE) +
-  theme_minimal()
-
-
-df3 %>%
-  group_by(Q3, Q12) %>%
-  summarise(n = n()) %>%
-  mutate(freq = n / sum(n))
