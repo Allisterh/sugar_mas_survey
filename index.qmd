@@ -1,0 +1,189 @@
+---
+title: "A Review of Sugar Mas"
+lightbox: true
+author:
+  - name: Kareem Martin
+    corresponding: true
+    email: kareem.martin@gmail.com
+    roles:
+      - Investigation
+      - Project administration
+      - Software
+      - Visualization
+    affiliations:
+      - Personal
+  - name: Allister O Hodge
+    corresponding: false
+    email: hodge_allister2@outlook.com
+    roles: []
+    affiliations:
+      - Personal
+
+date: "`r Sys.Date()`"
+keywords:
+  - Sugar Mas
+  - Expenditure
+  - Survey
+abstract: |
+  This short analysis assesses the impact of Sugar Mas on economic activity in Saint Kitts. The study reveals that for Suugar Mas 53.......
+format:
+  html:
+    css: styles1.css
+    toc: true
+    toc-location: right
+    number-sections: true
+  revealjs:
+    output-file: highlight-revealjs
+  jats: default
+  docx: default
+  pdf:
+    documentclass: article
+    geometry:
+      - margin=1in
+
+    repo-url: https://github.com/Allisterh/sugar_mas_survey
+    repo-actions: [edit, issue]  
+editor: visual
+---
+
+```{r}
+
+```
+
+```{r, echo=FALSE}
+# Load required libraries if needed
+
+```
+
+```{r, echo=FALSE, results='asis'}
+cat('<img src="images/logo.png" class="logo">')
+cat('<button class="switch" onclick="toggleDarkMode()">Dark Mode</button>')
+
+```
+
+**Abstract:**
+
+The objective of this study is to investigate the impact of St Kitts annual Carnival activities (Sugar Mas) on economic activity in St Kitts. To undertake the assessment a survey research design was adopted and a sample size of 237 persons was arrived at from a population of 6000 ; and these samples made up the number of questionnaires that were distributed. Findings from the study revealed that Sugar Mas Carnival had very a large impact on economic activity in St Kitts for the month of December 2024. *(add more here)*........Based on these findings, the study recommends that Sugar Mas Carnival should be enhanced through deliberate interventions to enable it contribute more to the economy during the month of December; and this could be achieved by interrogating and up scaling the mix as well as quality of offerings of the carnival events in order to drive traffic with corresponding positive impact on economic development. The government at various levels should create an enabling environment through ways and means in specific intangibles such as maintenance of law and order.
+
+**Keywords:** St Kitts Carnival, Sugar Mas, economic activity and expenditures.
+
+## Introduction
+
+More than just a display of cultural elegance and rich traditional heritage, carnivals represents an important economic enterprise with potentials for development of societies. Carnival is a segment of the creative industries and like the core real sector industries of the economy; the creative industries have the potentials to drive the growth and development of societies
+
+St Kitts Sugar Mas is a vibrant cultural celebration that draws both local and international visitors. In addition to their cultural importance, carnivals generate significant economic and social value. Globally, the creative and cultural industries are among the fastest growing sectors. The culture sector is estimated to account for 6.1% of the global economy (UNESCO, 2023), generating upwards of 30 million jobs, and employing more people aged 15 to 29 than all other sectors. The latter being important for addressing the substantially high youth unemployment rates in countries. Demand for culture is also at all-time highs, with households continuously spending more on recreation and culture (OECD, 2022). Carnivals are one of the cultural products currently experiencing high demand and they contribute significantly to a country’s economy.
+
+*insert chart here allister*
+
+![Figure 1:](graphs/Picture1.png){fig-align="left"}
+
+Spending during the season ranged from US\$143.5 million in Brazil to US\$18.9 million in Jamaica. It is important to note that these estimates do not pertain to increased activity across support industries and the various sub sectors or account for the multiplier effect. Meaning that the total economic impact of those carnivals are a significant multiple of the estimates in Figure 1.
+
+Quantifying the economic benefits of Sugar Mas will enable policymakers to better allocate resources and prioritize the funding of the festival. This proposal outlines a comprehensive economic impact assessment (EIA) to quantify the economic contributions of the Carnival to the country's economy. The EIA will provide valuable insights into the event's direct, indirect, and induced economic benefits, including revenue generation, job creation, spending on goods and services, and tourism promotion.
+
+## Objective
+
+The primary objectives of this EIA are to:
+
+-   **Measure the direct economic impact:** Quantify the direct spending by visitors and locals during the Carnival period, including expenditures on costumes, accommodations, food and beverage, transportation, and entertainment.
+
+-   **Assess the indirect economic impact:** Analyze the multiplier effects of direct spending on local businesses and industries, such as hotels, restaurants, and retail shops.
+
+-   **Evaluate the induced economic impact:** Determine the secondary economic effects, such as increased employment and tax revenue, resulting from the Carnival.
+
+-   **Identify key economic benefits:** Highlight the specific economic advantages of the Carnival, including job creation, foreign exchange earnings, and tax revenue.
+
+-   **Provide recommendations:** Offer strategic recommendations to maximize the economic benefits of future Carnival events.
+
+## Methods
+
+The EIA will employ a mixed-methods approach, combining quantitative and qualitative data collection techniques. The specific methodologies include:
+
+-   **Economic Impact Modeling:** Utilizing recognized economic impact modeling techniques, such as input-output analysis and econometric modeling, to estimate the direct, indirect, and induced economic effects.
+
+-   **Survey and Questionnaire:** Conducting surveys and questionnaires to collect data on visitor demographics, spending patterns, and satisfaction levels.
+
+-   **Primary Data Collection:** Gathering primary data through interviews with key stakeholders, including hoteliers, restaurateurs, and event organizers.
+
+-   **Secondary Data Analysis:** Analyzing secondary data sources, such as government statistics, tourism reports, and media coverage, to supplement primary data.
+
+### Data Collection Method
+
+**The following data was collected:**
+
+-   **Visitor Demographics:** Age, gender, nationality.
+
+-   **Expenditure Patterns:** Spending on accommodation, food and beverage, transportation, entertainment, and shopping.
+
+-   **Length of Stay:** Number of nights spent in the country.
+
+-   **Satisfaction Levels:** Overall satisfaction with the Carnival experience.
+
+-   **Economic Impacts:** Revenue generated by businesses, job creation, and tax revenue.
+
+## Results
+
+A total of **237** were surveyed over the period December to January 2025. This period allowed us to capture persons towards the end of their stay to be able to assess the true extent of their expenditure whilst in the Federation.
+
+```{r}
+#| label: gg-oz-gapminder
+#| fig-cap: "Life expectancy from 1952 - 2007 for Australia. Life expentancy increases steadily except from 1962 to 1969. We can safely say that our life expectancy is higher than it has ever been!"
+library(ggplot2)
+library(dplyr)
+library(gapminder)
+
+gapminder |>
+  filter(country == "Australia") |>
+  ggplot(aes(x = lifeExp,
+             y = year)) + 
+  geom_point()
+```
+
+**Total Number of respondents**:
+
+**Respondents by Gender**
+
+![Figure 1:](graphs/gender.png){fig-align="left"}
+
+**Distribution of Responses:**
+
+![](graphs/age.png)
+
+**Almost two-thirds of of respondents less than \$2,000 on carnival celebrations**.
+
+![](graphs/spend.png)
+
+![](graphs/frequency.png)
+
+A total of 92 persons responded to the accommodation question. 55.4% of the respondents spent over 2,000 on accommodation. Roughly, XCD 1.1m was spent over the few weeks in St Kitts
+
+![](graphs/accomodation.png)
+
+![](graphs/food_beverage.png)
+
+## Discussion
+
+Interpret the results and discuss implications.
+
+## Conclusion
+
+Summarize the key points of your study.
+
+{{< revealjs "presentation.html" >}}
+
+```{r, echo=FALSE, results='asis'}
+cat('<script>
+function toggleDarkMode() {
+  document.body.classList.toggle("dark-mode");
+  localStorage.setItem("dark-mode", document.body.classList.contains("dark-mode"));
+}
+
+window.onload = function() {
+  if (localStorage.getItem("dark-mode") === "true") {
+    document.body.classList.add("dark-mode");
+  }
+};
+</script>')
+```
+
+------------------------------------------------------------------------
