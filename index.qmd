@@ -350,6 +350,35 @@ plot(p_food)
 
 ```
 
+```{r}
+#| label: fig-accomadation
+#| fig-cap: "Amount spent on accomadation"
+#| fig-dpi: 300
+#| fig-cap-location: top
+#| fig-width: 20
+#| fig-height: 15
+#| echo: false
+
+p_accom <- df3 %>% group_by(Q20) %>% 
+  dplyr::tally() |> 
+  # mutate(n = fct_reorder(Q13, Q13, .desc = TRUE))
+  ggplot(aes(x= reorder(Q20,-n), y = n, fill = Q20))+
+  geom_col()+
+  labs(x= "Expenditure Category", y = 'Number of reponses')+
+  scale_y_continuous(breaks = scales::breaks_width(10),
+                     limits = c(0,40),
+                     expand = c(0,0))+
+  # scale_fill_manual(values =c('#04943b', "#E7B800",      '#cb152b',
+  #                             '#7c7c7c', '#665d38',
+  #                             "#00AFBB") )
+  scale_fill_brewer(palette = "Set1", name = 'Expenditure') +
+  theme_minimal() +
+  theme(legend.position = 'top')
+
+
+ggplotly(p_accom)
+```
+
 **On average females had a stronger propensity to spend than men**. Although the survey was dominated by responses from females, women on average had a stringer spend factor than men. For example, of the 32 persons that indicated that they spent more than \$1,200 for the carnival season, women accounted for 23 of these responses, see @tab-table1.
 
 ```{r}
@@ -379,6 +408,20 @@ sjPlot::sjt.xtab(var.row = df3$Q12,
                  show.row.prc = TRUE)
 
 
+```
+
+```{r}
+#| label: tab-table3
+#| tab-cap: "Relationship between number events attended and spending"
+#| tab-cap-location: top
+#| echo: false
+
+summarytools::ctable(df3$Q3,df3$Q12)
+
+df3 |>
+  tbl_cross(row = Q3, col = Q12, percent = "cell") |>
+  add_p() |>
+  bold_labels()
 ```
 
 **The three multipliers used are:**

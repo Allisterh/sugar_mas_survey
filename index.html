@@ -24,40 +24,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -74,6 +40,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="index_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="index_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="index_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<link href="index_files/libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+
+<script src="index_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<script src="index_files/libs/plotly-binding-4.10.4/plotly.js"></script>
+
+<script src="index_files/libs/typedarray-0.1/typedarray.min.js"></script>
+
+<script src="index_files/libs/jquery-3.5.1/jquery.min.js"></script>
+
+<link href="index_files/libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+
+<script src="index_files/libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+
+<link href="index_files/libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+
+<script src="index_files/libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
  
   <style>
   .slide-deck {
@@ -224,67 +208,872 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="results" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="results"><span class="header-section-number">4</span> Results</h2>
 <p>A total of <strong>237</strong> were surveyed over the period December to January 2025. This period allowed us to capture persons towards the end of their stay to be able to assess the true extent of their expenditure whilst in the Federation.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'ggplot2' was built under R version 4.4.1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'dplyr' was built under R version 4.4.1</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'dplyr'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:stats':
-
-    filter, lag</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:base':
-
-    intersect, setdiff, setequal, union</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gapminder)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'gapminder' was built under R version 4.4.2</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"Australia"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> lifeExp,</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> year)) <span class="sc">+</span> </span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="index_files/figure-html/gg-oz-gapminder-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Life expectancy from 1952 - 2007 for Australia. Life expentancy increases steadily except from 1962 to 1969. We can safely say that our life expectancy is higher than it has ever been!"><img src="index_files/figure-html/gg-oz-gapminder-1.png" class="img-fluid figure-img" width="672" alt="Life expectancy from 1952 - 2007 for Australia. Life expentancy increases steadily except from 1962 to 1969. We can safely say that our life expectancy is higher than it has ever been!"></a></p>
-<figcaption>Life expectancy from 1952 - 2007 for Australia. Life expentancy increases steadily except from 1962 to 1969. We can safely say that our life expectancy is higher than it has ever been!</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p><strong>Total Number of respondents</strong>:</p>
+<p><strong>Total Number of respondents</strong> was 237.</p>
 <p><strong>Respondents by Gender</strong></p>
-<div class="quarto-figure quarto-figure-left">
-<figure class="figure">
-<div class="quarto-figure quarto-figure-left">
-<figure class="figure">
-<p><a href="graphs/gender.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure 1:"><img src="graphs/gender.png" class="img-fluid quarto-figure quarto-figure-left figure-img" alt="Figure 1:"></a></p>
+<p>The majority of respondents to the survey were females, females accounted for two thirds (68.2%) of the respondents. See <a href="#fig-gender" class="quarto-xref">Figure&nbsp;1</a> for an illustration.</p>
+<div class="cell fig-cap-location-top">
+<div class="cell-output-display">
+<div id="fig-gender" class="quarto-float quarto-figure quarto-figure-center anchored" data-cap-location="top">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-gender-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Responses by Gender
+</figcaption>
+<div aria-describedby="fig-gender-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-gender-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;1: Responses by Gender"><img src="index_files/figure-html/fig-gender-1.png" class="img-fluid figure-img" width="2100"></a>
+</div>
 </figure>
 </div>
-<figcaption>Figure 1:</figcaption>
-</figure>
+</div>
 </div>
 <p><strong>Distribution of Responses:</strong></p>
-<p><a href="graphs/age.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="graphs/age.png" class="img-fluid"></a></p>
-<p><strong>Almost two-thirds of of respondents less than $2,000 on carnival celebrations</strong>.</p>
-<p><a href="graphs/spend.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="graphs/spend.png" class="img-fluid"></a></p>
-<p><a href="graphs/frequency.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="graphs/frequency.png" class="img-fluid"></a></p>
+<p>Persons between the ages of 25 to 44 accounted for 66.4 percent of the responses see <a href="#fig-age" class="quarto-xref">Figure&nbsp;2</a>.</p>
+<div class="cell fig-cap-location-top">
+<div class="cell-output-display">
+<div id="fig-age" class="quarto-float quarto-figure quarto-figure-center anchored" data-cap-location="top">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-age-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Responses by Gender
+</figcaption>
+<div aria-describedby="fig-age-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-age-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;2: Responses by Gender"><img src="index_files/figure-html/fig-age-1.png" class="img-fluid figure-img" width="2100"></a>
+</div>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Almost two-thirds of of respondents less than</strong> $2,000 on carnival celebrations. If we generalize this amount to the total population attending carnival, we can assume that on average expenditure during carnival is $12.0m. The economic multiplier across various studies suggest that economic multiplier. See <a href="#fig-spend" class="quarto-xref">Figure&nbsp;3</a> below.</p>
+<div class="cell fig-cap-location-top">
+<div class="cell-output-display">
+<div id="fig-spend" class="quarto-float quarto-figure quarto-figure-center anchored" data-cap-location="top">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-spend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Responses by Spend
+</figcaption>
+<div aria-describedby="fig-spend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-spend-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;3: Responses by Spend"><img src="index_files/figure-html/fig-spend-1.png" class="img-fluid figure-img" width="2100"></a>
+</div>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell fig-cap-location-top">
+<div class="cell-output-display">
+<div id="fig-events" class="quarto-float quarto-figure quarto-figure-center anchored" data-cap-location="top">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-events-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Responses by Number of Events attended
+</figcaption>
+<div aria-describedby="fig-events-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-events-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;4: Responses by Number of Events attended"><img src="index_files/figure-html/fig-events-1.png" class="img-fluid figure-img" width="1200"></a>
+</div>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell fig-cap-location-top">
+<div class="cell-output-display">
+<div id="fig-transport" class="quarto-float quarto-figure quarto-figure-center anchored" data-cap-location="top">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-transport-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Amount spent on Transportation
+</figcaption>
+<div aria-describedby="fig-transport-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-transport-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;5: Amount spent on Transportation"><img src="index_files/figure-html/fig-transport-1.png" class="img-fluid figure-img" width="2100"></a>
+</div>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell fig-cap-location-top">
+<div class="cell-output-display">
+<div id="fig-prep" class="quarto-float quarto-figure quarto-figure-center anchored" data-cap-location="top">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-prep-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Amount spent on Transportation
+</figcaption>
+<div aria-describedby="fig-prep-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-prep-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;6: Amount spent on Transportation"><img src="index_files/figure-html/fig-prep-1.png" class="img-fluid figure-img" width="2100"></a>
+</div>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell fig-cap-location-top">
+<div class="cell-output-display">
+<div id="fig-spend2" class="quarto-float quarto-figure quarto-figure-center anchored" data-cap-location="top">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-spend2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Amount spent tickets
+</figcaption>
+<div aria-describedby="fig-spend2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-spend2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;7: Amount spent tickets"><img src="index_files/figure-html/fig-spend2-1.png" class="img-fluid figure-img" width="2100"></a>
+</div>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell fig-cap-location-top">
+<div class="cell-output-display">
+<div id="fig-food" class="quarto-float quarto-figure quarto-figure-center anchored" data-cap-location="top">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-food-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Amount spent food and beverage
+</figcaption>
+<div aria-describedby="fig-food-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="index_files/figure-html/fig-food-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Figure&nbsp;8: Amount spent food and beverage"><img src="index_files/figure-html/fig-food-1.png" class="img-fluid figure-img" width="2100"></a>
+</div>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell fig-cap-location-top">
+<div id="fig-accomadation" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-accomadation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-a89789d57b0f04efb440" style="width:100%;height:487px;"></div>
+<script type="application/json" data-for="htmlwidget-a89789d57b0f04efb440">{"x":{"data":[{"orientation":"v","width":0.90000000000000036,"base":0,"x":[4],"y":[17],"text":"reorder(Q20, -n): $1100 to $1400<br />n:  17<br />Q20: $1100 to $1400","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(228,26,28,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"$1100 to $1400","legendgroup":"$1100 to $1400","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":0.90000000000000036,"base":0,"x":[5],"y":[14],"text":"reorder(Q20, -n): $1400 to $1700<br />n:  14<br />Q20: $1400 to $1700","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(55,126,184,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"$1400 to $1700","legendgroup":"$1400 to $1700","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":0.90000000000000036,"base":0,"x":[7],"y":[10],"text":"reorder(Q20, -n): $1700 to $2000<br />n:  10<br />Q20: $1700 to $2000","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(77,175,74,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"$1700 to $2000","legendgroup":"$1700 to $2000","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":0.90000000000000013,"base":0,"x":[2],"y":[24],"text":"reorder(Q20, -n): $200 to $500<br />n:  24<br />Q20: $200 to $500","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(152,78,163,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"$200 to $500","legendgroup":"$200 to $500","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":0.90000000000000036,"base":0,"x":[3],"y":[19],"text":"reorder(Q20, -n): $500 to $800<br />n:  19<br />Q20: $500 to $800","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(255,127,0,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"$500 to $800","legendgroup":"$500 to $800","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":0.90000000000000036,"base":0,"x":[6],"y":[12],"text":"reorder(Q20, -n): $800 to $1100<br />n:  12<br />Q20: $800 to $1100","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(255,255,51,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"$800 to $1100","legendgroup":"$800 to $1100","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":0.89999999999999991,"base":0,"x":[1],"y":[29],"text":"reorder(Q20, -n): Over $2000<br />n:  29<br />Q20: Over $2000","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(166,86,40,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Over $2000","legendgroup":"Over $2000","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":null,"base":null,"x":[null],"y":[null],"text":"reorder(Q20, -n): NA<br />n: 112<br />Q20: NA","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"transparent","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"NA","legendgroup":"NA","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":25.74124809741248,"r":7.3059360730593621,"b":39.69558599695587,"l":37.260273972602747},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,8.5999999999999996],"tickmode":"array","ticktext":["Over $2000","$200 to $500","$500 to $800","$1100 to $1400","$1400 to $1700","$800 to $1100","$1700 to $2000"],"tickvals":[1,2,3,4,5,6,7],"categoryorder":"array","categoryarray":["Over $2000","$200 to $500","$500 to $800","$1100 to $1400","$1400 to $1700","$800 to $1100","$1700 to $2000"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"Expenditure Category","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0,40],"tickmode":"array","ticktext":["0","10","20","30","40"],"tickvals":[0,10,20,30,40],"categoryorder":"array","categoryarray":["0","10","20","30","40"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Number of reponses","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"Expenditure","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"62d4637d6c0d":{"x":{},"y":{},"fill":{},"type":"bar"}},"cur_data":"62d4637d6c0d","visdat":{"62d4637d6c0d":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-accomadation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: Amount spent on accomadation
+</figcaption>
+</figure>
+</div>
+</div>
+<p><strong>On average females had a stronger propensity to spend than men</strong>. Although the survey was dominated by responses from females, women on average had a stringer spend factor than men. For example, of the 32 persons that indicated that they spent more than $1,200 for the carnival season, women accounted for 23 of these responses, see <span class="citation" data-cites="tab-table1">@tab-table1</span>.</p>
+<div class="cell" data-tab-cap-location="top">
+<div class="cell-output-display">
+<table style="border-collapse:collapse; border:none;">
+<caption style="font-weight: bold; text-align:left;">Relationship between Gender and Expenditure</caption>
+ <tbody><tr>
+ <th style="border-top:double; text-align:center; font-style:italic; font-weight:normal; border-bottom:1px solid;" rowspan="2">Q3</th>
+ <th style="border-top:double; text-align:center; font-style:italic; font-weight:normal;" colspan="4">Q17</th>
+ <th style="border-top:double; text-align:center; font-style:italic; font-weight:normal; font-weight:bolder; font-style:italic; border-bottom:1px solid; " rowspan="2">Total</th>
+ </tr>
+ 
+<tr>
+ <td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">$100 to $400</td>
+ <td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">$400 to $800</td>
+ <td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">$800 to $1200</td>
+ <td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">Over $1200</td>
+ </tr>
+ 
+<tr> 
+<td style="padding:0.2cm;  text-align:left; vertical-align:middle;">Female</td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">61</span><br><span style="color:#333399;">41.5&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">35</span><br><span style="color:#333399;">23.8&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">28</span><br><span style="color:#333399;">19&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">23</span><br><span style="color:#333399;">15.6&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center;  "><span style="color:black;">147</span><br><span style="color:#333399;">100&nbsp;%</span></td> 
+</tr>
+ 
+<tr> 
+<td style="padding:0.2cm;  text-align:left; vertical-align:middle;">Male</td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">34</span><br><span style="color:#333399;">56.7&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">10</span><br><span style="color:#333399;">16.7&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">8</span><br><span style="color:#333399;">13.3&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">8</span><br><span style="color:#333399;">13.3&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center;  "><span style="color:black;">60</span><br><span style="color:#333399;">100&nbsp;%</span></td> 
+</tr>
+ 
+<tr> 
+<td style="padding:0.2cm;  text-align:left; vertical-align:middle;">Prefer not to say</td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">1</span><br><span style="color:#333399;">50&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">0</span><br><span style="color:#333399;">0&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">0</span><br><span style="color:#333399;">0&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">1</span><br><span style="color:#333399;">50&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center;  "><span style="color:black;">2</span><br><span style="color:#333399;">100&nbsp;%</span></td> 
+</tr>
+ 
+<tr> 
+<td style="padding:0.2cm;  border-bottom:double; font-weight:bolder; font-style:italic; text-align:left; vertical-align:middle;">Total</td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;"><span style="color:black;">96</span><br><span style="color:#333399;">45.9&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;"><span style="color:black;">45</span><br><span style="color:#333399;">21.5&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;"><span style="color:black;">36</span><br><span style="color:#333399;">17.2&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;"><span style="color:black;">32</span><br><span style="color:#333399;">15.3&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;"><span style="color:black;">209</span><br><span style="color:#333399;">100&nbsp;%</span></td> 
+</tr>
+<tr><td style="text-align:right; font-size:0.9em; font-style:italic; padding:0.2cm;" colspan="6">χ<sup>2</sup>=6.478 · df=6 · Cramer's V=0.124 · Fisher's p=0.339</td> 
+</tr>
+ 
+</tbody></table>
+</div>
+</div>
+<p><strong>The lower the number of events attended the greater the spend.</strong> A secondary aspect investigated was the relationship between the number of events attended and the avereage spend on carnival, see <span class="citation" data-cites="tab-table2">@tab-table2</span>. This may seem counter-intutitive but we suspect that this has to do with budgetary constraints faced during the holiday season, whereby persons have to make a decision between attending a large number of events and have lower spending versus a smaller number of events and higher spend factor.</p>
+<div class="cell" data-tab-cap-location="top">
+<div class="cell-output-display">
+<table style="border-collapse:collapse; border:none;">
+<caption style="font-weight: bold; text-align:left;"></caption>
+ <tbody><tr>
+ <th style="border-top:double; text-align:center; font-style:italic; font-weight:normal; border-bottom:1px solid;" rowspan="2">Q12</th>
+ <th style="border-top:double; text-align:center; font-style:italic; font-weight:normal;" colspan="6">Q13</th>
+ <th style="border-top:double; text-align:center; font-style:italic; font-weight:normal; font-weight:bolder; font-style:italic; border-bottom:1px solid; " rowspan="2">Total</th>
+ </tr>
+ 
+<tr>
+ <td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">$1000 to $2000</td>
+ <td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">$2000 to $3000</td>
+ <td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">$3000 to $4000</td>
+ <td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">$4000 to $5000</td>
+ <td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">Less than $1000</td>
+ <td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">More than $5000</td>
+ </tr>
+ 
+<tr> 
+<td style="padding:0.2cm;  text-align:left; vertical-align:middle;">1 to 3</td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">28</span><br><span style="color:#333399;">30.4&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">12</span><br><span style="color:#333399;">13&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">6</span><br><span style="color:#333399;">6.5&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">1</span><br><span style="color:#333399;">1.1&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">42</span><br><span style="color:#333399;">45.7&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">3</span><br><span style="color:#333399;">3.3&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center;  "><span style="color:black;">92</span><br><span style="color:#333399;">100&nbsp;%</span></td> 
+</tr>
+ 
+<tr> 
+<td style="padding:0.2cm;  text-align:left; vertical-align:middle;">3 to 5</td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">18</span><br><span style="color:#333399;">25.7&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">17</span><br><span style="color:#333399;">24.3&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">11</span><br><span style="color:#333399;">15.7&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">6</span><br><span style="color:#333399;">8.6&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">17</span><br><span style="color:#333399;">24.3&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">1</span><br><span style="color:#333399;">1.4&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center;  "><span style="color:black;">70</span><br><span style="color:#333399;">100&nbsp;%</span></td> 
+</tr>
+ 
+<tr> 
+<td style="padding:0.2cm;  text-align:left; vertical-align:middle;">5 to 7</td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">9</span><br><span style="color:#333399;">23.7&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">6</span><br><span style="color:#333399;">15.8&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">7</span><br><span style="color:#333399;">18.4&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">5</span><br><span style="color:#333399;">13.2&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">2</span><br><span style="color:#333399;">5.3&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">9</span><br><span style="color:#333399;">23.7&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center;  "><span style="color:black;">38</span><br><span style="color:#333399;">100&nbsp;%</span></td> 
+</tr>
+ 
+<tr> 
+<td style="padding:0.2cm;  text-align:left; vertical-align:middle;">Over 7</td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">4</span><br><span style="color:#333399;">16.7&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">2</span><br><span style="color:#333399;">8.3&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">5</span><br><span style="color:#333399;">20.8&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">2</span><br><span style="color:#333399;">8.3&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">4</span><br><span style="color:#333399;">16.7&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center; "><span style="color:black;">7</span><br><span style="color:#333399;">29.2&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center;  "><span style="color:black;">24</span><br><span style="color:#333399;">100&nbsp;%</span></td> 
+</tr>
+ 
+<tr> 
+<td style="padding:0.2cm;  border-bottom:double; font-weight:bolder; font-style:italic; text-align:left; vertical-align:middle;">Total</td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;"><span style="color:black;">59</span><br><span style="color:#333399;">26.3&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;"><span style="color:black;">37</span><br><span style="color:#333399;">16.5&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;"><span style="color:black;">29</span><br><span style="color:#333399;">12.9&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;"><span style="color:black;">14</span><br><span style="color:#333399;">6.2&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;"><span style="color:black;">65</span><br><span style="color:#333399;">29&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;"><span style="color:black;">20</span><br><span style="color:#333399;">8.9&nbsp;%</span></td>
+<td style="padding:0.2cm; text-align:center;   border-bottom:double;"><span style="color:black;">224</span><br><span style="color:#333399;">100&nbsp;%</span></td> 
+</tr>
+<tr><td style="text-align:right; font-size:0.9em; font-style:italic; padding:0.2cm;" colspan="8">χ<sup>2</sup>=64.701 · df=15 · Cramer's V=0.310 · Fisher's p=0.000</td> 
+</tr>
+ 
+</tbody></table>
+</div>
+</div>
+<div class="cell" data-tab-cap-location="top">
+<div class="cell-output cell-output-stdout">
+<pre><code>Cross-Tabulation, Row Proportions  
+Q3 * Q12  
+Data Frame: df3  
+
+------------------- ----- ------------- ------------ ------------ ------------ ------------ --------------
+                      Q12        1 to 3       3 to 5       5 to 7       Over 7         &lt;NA&gt;          Total
+                 Q3                                                                                       
+             Female         61 ( 37.9%)   52 (32.3%)   26 (16.1%)   17 (10.6%)   5 (  3.1%)   161 (100.0%)
+               Male         32 ( 43.8%)   19 (26.0%)   13 (17.8%)    7 ( 9.6%)   2 (  2.7%)    73 (100.0%)
+  Prefer not to say          2 (100.0%)    0 ( 0.0%)    0 ( 0.0%)    0 ( 0.0%)   0 (  0.0%)     2 (100.0%)
+               &lt;NA&gt;          0 (  0.0%)    0 ( 0.0%)    0 ( 0.0%)    0 ( 0.0%)   1 (100.0%)     1 (100.0%)
+              Total         95 ( 40.1%)   71 (30.0%)   39 (16.5%)   24 (10.1%)   8 (  3.4%)   237 (100.0%)
+------------------- ----- ------------- ------------ ------------ ------------ ------------ --------------</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'sass':
+  method    from  
+  print.css memisc</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="tirljlpkve" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tirljlpkve table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#tirljlpkve thead, #tirljlpkve tbody, #tirljlpkve tfoot, #tirljlpkve tr, #tirljlpkve td, #tirljlpkve th {
+  border-style: none;
+}
+
+#tirljlpkve p {
+  margin: 0;
+  padding: 0;
+}
+
+#tirljlpkve .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#tirljlpkve .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#tirljlpkve .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#tirljlpkve .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#tirljlpkve .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tirljlpkve .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tirljlpkve .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tirljlpkve .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#tirljlpkve .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#tirljlpkve .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#tirljlpkve .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#tirljlpkve .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#tirljlpkve .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#tirljlpkve .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#tirljlpkve .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#tirljlpkve .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#tirljlpkve .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#tirljlpkve .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#tirljlpkve .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tirljlpkve .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#tirljlpkve .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#tirljlpkve .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#tirljlpkve .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tirljlpkve .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#tirljlpkve .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#tirljlpkve .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tirljlpkve .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tirljlpkve .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#tirljlpkve .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tirljlpkve .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#tirljlpkve .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tirljlpkve .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tirljlpkve .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tirljlpkve .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tirljlpkve .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tirljlpkve .gt_left {
+  text-align: left;
+}
+
+#tirljlpkve .gt_center {
+  text-align: center;
+}
+
+#tirljlpkve .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#tirljlpkve .gt_font_normal {
+  font-weight: normal;
+}
+
+#tirljlpkve .gt_font_bold {
+  font-weight: bold;
+}
+
+#tirljlpkve .gt_font_italic {
+  font-style: italic;
+}
+
+#tirljlpkve .gt_super {
+  font-size: 65%;
+}
+
+#tirljlpkve .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#tirljlpkve .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#tirljlpkve .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#tirljlpkve .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#tirljlpkve .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#tirljlpkve .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#tirljlpkve .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#tirljlpkve .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#tirljlpkve div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header gt_col_headings gt_spanner_row">
+<th rowspan="2" id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th colspan="5" id="level 1; stat_1" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="colgroup"><div class="gt_column_spanner">
+<strong>Q12</strong>
+</div></th>
+<th rowspan="2" id="stat_0" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Total</strong></th>
+<th rowspan="2" id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+</tr>
+<tr class="odd gt_col_headings">
+<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">1 to 3</th>
+<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">3 to 5</th>
+<th id="stat_3" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">5 to 7</th>
+<th id="stat_4" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Over 7</th>
+<th id="stat_5" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Unknown</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label" style="font-weight: bold">Q3</td>
+<td class="gt_row gt_center" headers="stat_1"><br>
+</td>
+<td class="gt_row gt_center" headers="stat_2"><br>
+</td>
+<td class="gt_row gt_center" headers="stat_3"><br>
+</td>
+<td class="gt_row gt_center" headers="stat_4"><br>
+</td>
+<td class="gt_row gt_center" headers="stat_5"><br>
+</td>
+<td class="gt_row gt_center" headers="stat_0"><br>
+</td>
+<td class="gt_row gt_center" headers="p.value">0.4</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Female</td>
+<td class="gt_row gt_center" headers="stat_1">61 (26%)</td>
+<td class="gt_row gt_center" headers="stat_2">52 (22%)</td>
+<td class="gt_row gt_center" headers="stat_3">26 (11%)</td>
+<td class="gt_row gt_center" headers="stat_4">17 (7.2%)</td>
+<td class="gt_row gt_center" headers="stat_5">5 (2.1%)</td>
+<td class="gt_row gt_center" headers="stat_0">161 (68%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Male</td>
+<td class="gt_row gt_center" headers="stat_1">32 (14%)</td>
+<td class="gt_row gt_center" headers="stat_2">19 (8.0%)</td>
+<td class="gt_row gt_center" headers="stat_3">13 (5.5%)</td>
+<td class="gt_row gt_center" headers="stat_4">7 (3.0%)</td>
+<td class="gt_row gt_center" headers="stat_5">2 (0.8%)</td>
+<td class="gt_row gt_center" headers="stat_0">73 (31%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Prefer not to say</td>
+<td class="gt_row gt_center" headers="stat_1">2 (0.8%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_4">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_5">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_0">2 (0.8%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Unknown</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_4">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_5">1 (0.4%)</td>
+<td class="gt_row gt_center" headers="stat_0">1 (0.4%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label" style="font-weight: bold">Total</td>
+<td class="gt_row gt_center" headers="stat_1">95 (40%)</td>
+<td class="gt_row gt_center" headers="stat_2">71 (30%)</td>
+<td class="gt_row gt_center" headers="stat_3">39 (16%)</td>
+<td class="gt_row gt_center" headers="stat_4">24 (10%)</td>
+<td class="gt_row gt_center" headers="stat_5">8 (3.4%)</td>
+<td class="gt_row gt_center" headers="stat_0">237 (100%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+</tbody><tfoot class="gt_footnotes">
+<tr class="even">
+<td colspan="8" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> Fisher’s exact test</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div>
+<p><strong>The three multipliers used are:</strong></p>
+<ol type="1">
+<li><p>Direct Expenditure by festival organizers.</p></li>
+<li><p>Ancillary Expenditure by festival attendees.</p></li>
+<li><p>Capital Expenditure in respect of the project or event.</p></li>
+</ol>
+<p><strong>More generally multipliers are quoted as being of three types:</strong></p>
+<ol type="1">
+<li><p>Type I – Include direct or initial spending on a project as well as indirect spending (i.e.&nbsp;business to business). These may also be known as first order multipliers;</p></li>
+<li><p>Type II – As in type I plus “induced” effects (from i.e.&nbsp;increased household spending from wages earned). These higher order effects are calculated using Input-Output analysis;</p></li>
+<li><p>Type III – include the direct, indirect and induced spending but are modified according to spending patterns and demographics.</p></li>
+</ol>
 <p>A total of 92 persons responded to the accommodation question. 55.4% of the respondents spent over 2,000 on accommodation. Roughly, XCD 1.1m was spent over the few weeks in St Kitts</p>
-<p><a href="graphs/accomodation.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="graphs/accomodation.png" class="img-fluid"></a></p>
-<p><a href="graphs/food_beverage.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="graphs/food_beverage.png" class="img-fluid"></a></p>
 </section>
 <section id="discussion" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="discussion"><span class="header-section-number">5</span> Discussion</h2>

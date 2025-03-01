@@ -13,30 +13,16 @@
 
 
 
-# read in the data 
-
-df <- readr::read_tsv('data_input/KNA_carnival_data.tsv')
 
 
 
 
 
-df2 <- df |>  
-  janitor::clean_names()
-
-
-df2 |> 
-  dplyr::mutate(across(c(gender, age, nationality), 
-                       ~as.factor(.)))
-
-
-df_l5 %>% map(~tabyl(., q7 , q8))
+df2 %>% group_by(gender) %>% tally() 
 
 
 
-df2 %>% group_by(nationality) %>% tally() 
-
-
+df2 %>% map(~janitor::tabyl(., gender, nationality))
 
 
 df2 %>% group_by(nationality) %>% tally() |> 
@@ -61,7 +47,7 @@ df2 |>
   mutate(percentage = (n/all)*100) 
 
 
-library(scales)
+
 
 df2 |>  
   select(12) |> 
@@ -120,33 +106,27 @@ df2 |> dim()
 
 
 
-df3 <- df2 |> 
-  setNames(paste0("Q",seq(1:ncol(df2)))) |> 
-  print(n=10) |> 
-  mutate(across(Q3:Q23, ~as.factor(.)))
 
-length(df2)
-ncol(df2)
+
+
 
 df3 |>  
   select(Q17) |> 
   group_by(Q17) |> 
-  
   summarise(n = n()) %>%
   mutate(freq = n / sum(n))
 
 
 
-
-df1 <- pollster::illinois
-crosstab(df = df3, x = Q3, y = Q17) %>%
-  kable()       
-
-
-
 sjPlot::sjt.xtab(var.row = df3$Q3, 
                  var.col = df3$Q17, 
-                 title = "Table Title", 
+                 title = "Relationship between Gender and Expenditure", 
+                 show.row.prc = TRUE)
+
+
+sjPlot::sjt.xtab(var.row = df3$Q12, 
+                 var.col = df3$Q13, 
+                 title = "Relationship between Gender and Expenditure", 
                  show.row.prc = TRUE)
 
 
@@ -167,3 +147,21 @@ df3 %>%
   group_by(Q3, Q12) %>%
   summarise(n = n()) %>%
   mutate(freq = n / sum(n))
+
+
+
+summarytools::ctable(df3$Q3,df3$Q12)
+
+df3 |>
+  tbl_cross(row = Q3, col = Q12, percent = "cell") |>
+  add_p() |>
+  bold_labels()
+  ggpubr::ggpie('n', label = 'Q13', 
+                fill = 'Q13',
+                color = "white",
+                palette = c('#04943b', "#E7B800",      '#cb152b',
+                            '#7c7c7c', '#665d38',
+                            "#00AFBB") )
+
+  
+  dplyr::tally()

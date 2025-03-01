@@ -21,9 +21,30 @@ memory.limit(30000000)     # this is needed on some PCs to increase memory allow
 
 if(!require('renv')) install.packages('renv')
 # renv::init()
-if (!require("pacman")) install.packages("pacman")
-if (!require("janitor")) install.packages("janitor")
+# if (!require("pacman")) install.packages("pacman")
+# if (!require("janitor")) install.packages("janitor")
+
+# renv::install(packages = c('showtext', 'showtextdb'))
+# renv::install('cardx')
+renv::install('plotly')
 library(pacman)
+library(gtsummary)
+library(summarytools)
+library(fs)
+library(here)
+library(tidyverse)
+library(tidyplus)
+library(tidyselect)
+library(janitor)
+library(scales)
+library(ggpubr)
+library(plotly)
+library(knitr)
+library(sjPlot)
+library(showtext)
+# renv::status()
+# ?renv::status
+# renv::snapshot()
 suppressPackageStartupMessages(
   pacman::p_load(tidyverse, scales,
                  knitr, sjPlot,
@@ -35,22 +56,22 @@ suppressPackageStartupMessages(
 
 
 
-if (!require("googlesheets4")) install.packages("googlesheets4")
-library(googlesheets4)
+# if (!require("googlesheets4")) install.packages("googlesheets4")
+# library(googlesheets4)
+# 
+# url1 <- 'https://docs.google.com/spreadsheets/d/'
+# url2 <- '1a12rNnhmO4rU-hzbfduPnrcRtgzUDgIJz8qcbYvFZMk/edit?resourcekey=&gid=458918389#gid=458918389'
+# 
+# library(super)
+# 
+# super::glue(url1,url2)
 
-url1 <- 'https://docs.google.com/spreadsheets/d/'
-url2 <- '1a12rNnhmO4rU-hzbfduPnrcRtgzUDgIJz8qcbYvFZMk/edit?resourcekey=&gid=458918389#gid=458918389'
-
-library(super)
-
-super::glue(url1,url2)
-
-url <- super::glue("{url1}{url2}")
-url
-
-googlesheets4::read_sheet(url)
-
-gs4_user()
-"#562457"
-"#552D62"
+# url <- super::glue("{url1}{url2}")
+# url
+# 
+# googlesheets4::read_sheet(url)
+# 
+# gs4_user()
+# "#562457"
+# "#552D62"
 
