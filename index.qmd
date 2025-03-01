@@ -167,6 +167,7 @@ p_gender <- df2 %>% group_by(gender) %>% tally() |>
 
 
 plot(p_gender)
+
 ```
 
 **Distribution of Responses:**
@@ -224,7 +225,6 @@ plot(p_spend)
 #| fig-cap: "Responses by Number of Events attended"
 #| fig-dpi: 300
 #| fig-cap-location: top
-#| fig-width: 4
 #| echo: false
 
 p_events <- df3 %>% group_by(Q12) %>% tally() |> 
@@ -242,8 +242,10 @@ p_events <- df3 %>% group_by(Q12) %>% tally() |>
   theme(legend.position = 'top')
 
 
-plot(p_events)
+ggplotly(p_events)
 ```
+
+One of the more surprising results was the results from the question on transportation spending, which 120 persons responded with paying zero dollar. However, this was largely as the result the amount of residents which responded to the survey.
 
 ```{r}
 #| label: fig-transport
@@ -267,13 +269,14 @@ p_transport <- df3 %>% group_by(Q18) %>% tally() |>
   theme(legend.position = 'top')
 
 
-plot(p_transport)
+# plot(p_transport)
+ggplotly(p_transport)
 
 ```
 
 ```{r}
 #| label: fig-prep
-#| fig-cap: "Amount spent on Transportation"
+#| fig-cap: "Amount spent on Accessories"
 #| fig-dpi: 300
 #| fig-cap-location: top
 #| echo: false
@@ -294,7 +297,9 @@ p_prep <- df3 %>% group_by(Q17) %>%
   theme(legend.position = 'top')
 
 
-plot(p_prep)
+# plot(p_prep)
+
+plotly::ggplotly(p_prep)
 ```
 
 ```{r}
@@ -451,6 +456,16 @@ Interpret the results and discuss implications.
 Summarize the key points of your study.
 
 {{< revealjs "presentation.html" >}}
+
+## Visit Us 
+
+{{< fa link >}} [Saint Kitts Carnival](https://skncarnival.com/ "Sugar Mas")
+
+{{< fa brands facebook >}} [Saint Kitts Carnival Facebook](https://www.facebook.com/SKNCarnival/ "Our facebook page")
+
+{{< fa brands instagram >}} [Saint Kitts Carnival Instagram](https://www.instagram.com/skncarnival/?hl=en "Instagram page")
+
+{{< fa brands youtube >}} [Saint Kitts Carnival Youtube](https://www.instagram.com/skncarnival/?hl=en "Youtube page")
 
 ```{r, echo=FALSE, results='asis'}
 cat('<script>
